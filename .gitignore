@@ -1,5 +1,5 @@
-aws_infrastructure/.terraform/
-aws_infrastructure/.terraform.lock.hcl
-aws_infrastructure/terraform_debug.log
-aws_infrastructure/terraform.tfstate
-aws_infrastructure/terraform.tfstate.backup
+# Ignore Terraform local state and provider binaries
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
