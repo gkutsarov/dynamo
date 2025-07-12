@@ -52,42 +52,42 @@ variable "eks_cluster_version" {
 }
 
 variable "web_app_node_group_type" {
-  type = string
+  type    = string
   default = "ON_DEMAND"
 }
 
 variable "web_app_node_group_min_size" {
-  type = string
+  type    = string
   default = "1"
 }
 
 variable "web_app_node_group_max_size" {
-  type = string
+  type    = string
   default = "3"
 }
 
 variable "web_app_node_group_desired_size" {
-  type = string
+  type    = string
   default = "2"
 }
 
 variable "postgresql_node_group_type" {
-  type = string
+  type    = string
   default = "ON_DEMAND"
 }
 
 variable "postgresql_node_group_min_size" {
-  type = string
+  type    = string
   default = "1"
 }
 
 variable "postgresql_node_group_max_size" {
-  type = string
+  type    = string
   default = "3"
 }
 
 variable "postgresql_node_group_desired_size" {
-  type = string
+  type    = string
   default = "2"
 }
 

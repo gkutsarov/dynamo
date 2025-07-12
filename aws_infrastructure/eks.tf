@@ -33,99 +33,114 @@ module "eks" {
   cluster_addons = {
 
     #Provides DNS for service discovery within the cluster
-    coredns = { 
-        most_recent = true
+    coredns = {
+      most_recent = true
     }
 
     #Supports IAM Roles for Service Accounts. Allows pods to assume IAM roles.
-    eks-pod-identity-agent = { 
-        most_recent = true
+    eks-pod-identity-agent = {
+      most_recent = true
     }
 
     #Essential for K8S networking, without it pods can't communicate properly in K8S.
     kube-proxy = {
-        most_recent = true
+      most_recent = true
     }
 
     #Integrates Pods with the VPC network. Assign VPC IP address directly to pods.
     vpc-cni = {
-        most_recent = true
+      most_recent = true
     }
 
     #Manages dynamic provisioning of EBS volues to pods. Enables persistent storage for stateful workloads.
     aws-ebs-csi-driver = {
-        most_recent = true
-        service_account_role_arn = module.ebs_csi_irsa_role.iam_role_arn
+      most_recent              = true
+      service_account_role_arn = module.ebs_csi_irsa_role.iam_role_arn
     }
-}
+  }
 
-vpc_id = module.vpc.vpc_id
-subnet_ids = module.vpc.private_subnets
-control_plane_subnet_ids = module.vpc.private_subnets
+  vpc_id                   = module.vpc.vpc_id
+  subnet_ids               = module.vpc.private_subnets
+  control_plane_subnet_ids = module.vpc.private_subnets
 
-cluster_service_ipv4_cidr = var.cluster_service_cidr
+  cluster_service_ipv4_cidr = var.cluster_service_cidr
 
-enable_irsa = true
+  enable_irsa = true
 
-eks_managed_node_group_defaults = {
+  eks_managed_node_group_defaults = {
     instance_types = ["t2.medium", "t2.large", "t2.xlarge"]
-}
+  }
 
-eks_managed_node_groups = {
+  eks_managed_node_groups = {
 
     web_app_nodes = {
-        name = "web_app_node_group"
-        cluster_name = var.eks_cluster_name
-        subnet_ids = module.vpc.private_subnets
-        ami_type = "AL2023_x86_64_STANDARD"
-        min_size = var.web_app_node_group_min_size
-        max_size = var.web_app_node_group_max_size
-        desired_size = var.web_app_node_group_desired_size
-        capacity_type = var.web_app_node_group_type
-        ebs_optimized = true
-        instance_types = ["t2.large"]
-        labels = {
-            environment = "production"
-            workload = "web"
-        }
+      name           = "web_app_node_group"
+      cluster_name   = var.eks_cluster_name
+      subnet_ids     = module.vpc.private_subnets
+      ami_type       = "AL2023_x86_64_STANDARD"
+      min_size       = var.web_app_node_group_min_size
+      max_size       = var.web_app_node_group_max_size
+      desired_size   = var.web_app_node_group_desired_size
+      capacity_type  = var.web_app_node_group_type
+      ebs_optimized  = true
+      instance_types = ["t2.large"]
+      labels = {
+        environment = "production"
+        workload    = "web"
+      }
     }
 
     database_nodes = {
-        name = "postgresql_node_group"
-        cluster_name = var.eks_cluster_name
-        subnet_ids = module.vpc.private_subnets
-        ami_type = "AL2023_x86_64_STANDARD"
-        min_size = var.postgresql_node_group_min_size
-        max_size = var.postgresql_node_group_max_size
-        desired_size = var.postgresql_node_group_desired_size
-        capacity_type = var.postgresql_node_group_type
-        ebs_optimized = true
-        instance_types = ["t2.large"]
-        labels = {
-            environment = "production"
-            workload = "database"
+      name           = "postgresql_node_group"
+      cluster_name   = var.eks_cluster_name
+      subnet_ids     = module.vpc.private_subnets
+      ami_type       = "AL2023_x86_64_STANDARD"
+      min_size       = var.postgresql_node_group_min_size
+      max_size       = var.postgresql_node_group_max_size
+      desired_size   = var.postgresql_node_group_desired_size
+      capacity_type  = var.postgresql_node_group_type
+      ebs_optimized  = true
+      instance_types = ["t2.large"]
+      labels = {
+        environment = "production"
+        workload    = "database"
+      }
+      taints = [
+        {
+          key    = "workload"
+          value  = "database"
+          effect = "NO_SCHEDULE"
         }
-        taints = [
-            {
-                value = "database"
-                effect = "NO_SCHEDULE"
-            }
-        ]
+      ]
     }
-}
+  }
 }
 
 module "ebs_csi_irsa_role" {
-	source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
 
-	role_name             = "${var.eks_cluster_name}-ebs-csi"
-	attach_ebs_csi_policy = true
+  role_name             = "${var.eks_cluster_name}-ebs-csi"
+  attach_ebs_csi_policy = true
 
-	oidc_providers = {
-		main = {
-			provider_arn               = module.eks.oidc_provider_arn
-			namespace_service_accounts = ["kube-system:ebs-csi-controller-sa"]
-		}
-	}
+  oidc_providers = {
+    main = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:ebs-csi-controller-sa"]
+    }
+  }
+}
+
+module "lb_role" {
+  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  role_name = "load-balancer-role"
+
+  attach_load_balancer_controller_policy = true
+
+  oidc_providers = {
+    main = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:aws-load-balancer-controller"]
+    }
+  }
 }
 

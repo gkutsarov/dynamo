@@ -21,3 +21,11 @@ data "aws_subnet" "public_subnet_3" {
   }
   depends_on = [module.vpc]
 }
+
+data "aws_secretsmanager_secret" "github_token" {
+  name = "github_token"
+}
+
+data "aws_secretsmanager_secret_version" "github_token" {
+  secret_id = data.aws_secretsmanager_secret.github_token.id
+}

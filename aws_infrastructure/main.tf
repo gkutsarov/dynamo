@@ -21,3 +21,27 @@ resource "aws_iam_role" "eks_admin_role" {
     ]
   })
 }
+
+# Create namespace argocd for ArgoCD
+resource "kubernetes_namespace" "argocd_namespace" {
+  metadata {
+    annotations = {
+      name = "argocd"
+    }
+    name = "argocd"
+  }
+}
+
+## Create k8s secret from the stored secret in AWS, which we will pass to our ArgoCD
+resource "kubernetes_secret" "argocd_repo_secret" {
+  metadata {
+    name      = "github-argo"
+    namespace = "argocd"
+  }
+
+  data = {
+    username = (jsondecode(data.aws_secretsmanager_secret_version.github_token.secret_string)["username"])
+    token    = (jsondecode(data.aws_secretsmanager_secret_version.github_token.secret_string)["token"])
+  }
+
+}
