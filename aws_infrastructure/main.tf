@@ -45,3 +45,45 @@ resource "kubernetes_secret" "argocd_repo_secret" {
   }
 
 }
+
+resource "kubernetes_namespace" "postgresql_namespace" {
+  metadata {
+    annotations = {
+      name = "postgresql"
+    }
+    name = "postgresql"
+  }
+}
+
+resource "kubernetes_namespace" "python_app_namespace" {
+  metadata {
+    annotations = {
+      name = "python-app"
+    }
+    name = "python-app"
+  }
+}
+
+# Creating a k8s secret in the namespace where our python-app resides so it can connect to the Postgresql
+resource "kubernetes_secret" "python_app_to_postgresql" {
+  metadata {
+    name = "python-app-to-postgresql"
+    namespace = "python-app"
+  }
+  data = {
+    password          = base64encode("mypassword") #Password for auth.username defined in dynamo_apps/postgresql-app.yaml
+    postgres-password = base64encode("mypassword") #Password for the postgres superuser (if used)
+  }
+}
+
+# Changing the defaul DB password for Postgresql - needs to be in the same namespace
+resource "kubernetes_secret" "postgresql_secret" {
+  metadata {
+    name = "postgresqlsecret"
+    namespace = "postgresql"
+  }
+  data = {
+    password          = base64encode("mypassword") #Password for auth.username defined in dynamo_apps/postgresql-app.yaml
+    postgres-password = base64encode("mypassword") #Password for the postgres superuser (if used)
+  }
+}
