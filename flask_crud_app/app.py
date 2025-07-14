@@ -1,9 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for
 import psycopg2
 import os
+from tenacity import retry, wait_fixed, stop_after_attempt, before_sleep_log
+import logging
+
+# Set up logging for retry feedback (optional, but useful)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
+# Retry DB connection up to 30 times (every 2 seconds = 60 seconds max)
+@retry(wait=wait_fixed(2), stop=stop_after_attempt(30), before_sleep=before_sleep_log(logger, logging.WARNING))
 def get_connection():
     return psycopg2.connect(
         dbname=os.getenv("DB_NAME", "mydb"),
