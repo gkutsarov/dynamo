@@ -6,7 +6,7 @@ module "eks" {
 
   cluster_endpoint_private_access      = true
   cluster_endpoint_public_access       = true
-  cluster_endpoint_public_access_cidrs = ["130.204.137.163/32"]
+  cluster_endpoint_public_access_cidrs = ["78.83.170.45/32"]
 
   authentication_mode = "API"
 
