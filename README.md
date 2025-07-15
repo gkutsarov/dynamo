@@ -141,6 +141,7 @@ You can create the same user or any other user with a different name, but we nee
 
 This is important because in my **main.tf** I am using the ARN of the user.
 Look at line #13. Make sure you put your user ARN there.
+
 ![Alt text](imgs/main.tf%20iamadmin.png)
 
 2. Manually create ECR repository
