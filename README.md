@@ -112,7 +112,10 @@ Terraform will use these credentials by default.
 
 # :nut_and_bolt: Manual Configuration before Deployment (for now)
 
-1. **My setup uses an IAM user called *iamadmin* with attach policy *AdministratorAccess*. This is important because in my *main.tf* I am referencing this user ARN**
+1. **My setup uses an IAM user called *iamadmin* with attach policy *AdministratorAccess*.**
+![text](imgs/main.tf%20-%20iamadmin.png)
+
+**This is important because in my *main.tf* I am referencing this user ARN**
 
 
 
