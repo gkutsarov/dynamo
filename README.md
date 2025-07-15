@@ -122,10 +122,13 @@ cd flask_crud_app
 ```
 docker build -t python-app .
 ```
+![Alt text](imgs/building%20docker%20image.png)
 3. To see the image or all docker images run:
 ```
 docker images
 ```
+![Alt text](imgs/listing%20docker%20images.png)
+4. Leave the docker image for now. We would need it later.
 
 
 # :nut_and_bolt: Manual Configuration before Deployment (for now)
