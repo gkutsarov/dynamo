@@ -113,7 +113,7 @@ Terraform will use these credentials by default.
 # :nut_and_bolt: Manual Configuration before Deployment (for now)
 
 1. My setup uses an IAM user called *iamadmin* with attach policy *AdministratorAccess*.
-![Alt text](imgs/main.tf%20-%20iamadmin.png)
+![Alt text](imgs/iamadmin%20-%20AWS%20console.png)
 
 This is important because in my *main.tf* I am referencing this user ARN in the *eks.tf* file
 ![Alt text](imgs/eks.tf%20-%20ref%20to%20eks_admin_role.png)
