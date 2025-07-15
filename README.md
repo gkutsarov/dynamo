@@ -155,10 +155,10 @@ The ECR repository will look something like this:
 116529247286.dkr.ecr.eu-central-1.amazonaws.com
 ```
 
-Login to your ECR
+Login to your ECR with the command below but replace [URI_PLACEHOLDER] with your actual URI
 
 ```
-aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 905418146175.dkr.ecr.eu-central-1.amazonaws.com
+aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin [URI_PLACEHOLDER]
 ```
 
 
