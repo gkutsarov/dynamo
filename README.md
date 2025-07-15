@@ -198,12 +198,13 @@ This value is used to create two Kubernetes secrets one in python-app namespace 
 This command applies the Terraform configuration to provision the infrastructure. The `--auto-approve` flag skips the interactive approval prompt.
 
 # :gear: Database and Application Configuration
-I am using ArgoCD to deploy my application and postgresql. Check argocd.tf file
+I am using ArgoCD to deploy my application and postgresql. Check **argocd.tf** file
 ArgoCD is configured to monitor **https://github.com/gkutsarov/dynamo_apps** repo.
-In **bootstrap** repo I am creating application manifests .yaml files which use helm charts to deploy the applications.
+In the **bootstrap** repo I am creating application manifests .yaml files which use helm charts to deploy the applications.
 
 For the Postgresql there are 2 files. **postgresql-app.yaml** which uses the official Helm chart for the application which I have modifies with parameters for my use case.
-![Alt text](imgs/postgresql-app.png)
+Creating the following:
+![Alt text](imgs/postgresql_app.png)
 
 I use another file **postgresql-init-configmap.yaml** of type configmap with which I am creating a table called **students**
 ![Alt text](imgs/postgresql-configmap.png)
