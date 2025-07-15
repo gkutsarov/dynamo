@@ -190,6 +190,11 @@ This command initializes the working directory containing Terraform cinfiguratio
 ```
 terraform apply --auto-approve
 ```
+The setup at the moment will prompt you to enter a value for postgre_password variable. This value is once for our python app to authenticate to the database and another time 
+
+This value is used to create two Kubernetes secrets one in python-app namespace which our app uses to authenticate to the database and another secret in postgresql namespace which we create a password for our database user and alter the default postgresql password for the postgre user.
+![Alt text](imgs/terraform%20apply%20.png)
+
 This command applies the Terraform configuration to provision the infrastructure. The `--auto-approve` flag skips the interactive approval prompt.
 
 # :heavy_check_mark: Verification
