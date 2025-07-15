@@ -150,6 +150,16 @@ In your IDE terminal or simply in your terminal where AWS CLI is configured run:
 aws ecr create-repository --repository-name python-app --region eu-central-1
 ```
 Pay attention of the output of this command we need to grab the **repositoryUri**
+The ECR repository will look something like this:
+```
+116529247286.dkr.ecr.eu-central-1.amazonaws.com
+```
+
+Login to your ECR
+
+```
+aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 905418146175.dkr.ecr.eu-central-1.amazonaws.com
+```
 
 
 # :rocket: Deployment Steps
