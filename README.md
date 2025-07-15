@@ -211,6 +211,12 @@ I use another file **postgresql-init-configmap.yaml** of type configmap with whi
 ![Alt text](imgs/postgresql-configmap.png)
 
 For my Python app we are doing the same with **python-app.yaml**. Creating an application manifest which points to **python_app** repository where my custom Helm chart is.
+This way the application manifests uses **Chart.yaml** to install my application with **templates** files **deployment.yaml**, **service.yaml**, **ingress.yaml**.
+
+In the **values.yaml** we pass the values we want/need to the **deployment.yaml**
+
+It is important to note that you shold use your ECR repository which we created earlier.
+
 ![Alt text](imgs/python-app.png)
 ![Alt text](imgs/python-app-values.png)
 
