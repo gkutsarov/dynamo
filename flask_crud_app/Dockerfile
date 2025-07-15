@@ -5,6 +5,9 @@ FROM python:3.11-slim
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# Create a non-root user
+RUN addgroup --system pythongroup && adduser --system --ingroup pythongroup pythonuser
+
 # Set working directory
 WORKDIR /app
 
@@ -12,10 +15,16 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# COPY project files
+# Copy app files
 COPY . .
 
-# Expose Flask port 5000
+# Change ownership of the app directory
+RUN chown -R pythonuser:pythongroup /app
+
+# Switch to non-root user
+USER pythonuser
+
+# Expose Flask port
 EXPOSE 5000
 
 # Start the app
