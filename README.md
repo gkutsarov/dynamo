@@ -112,24 +112,30 @@ aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
 
 Terraform will use these credentials by default.
 
+# :pick: Building the docker image of our application
+
+1. Once you have cloned the repo navigate to **flask_crup_app**
+```
+cd flask_crud_app
+```
+
 # :nut_and_bolt: Manual Configuration before Deployment (for now)
 
-1. My setup uses an IAM user called *iamadmin* with attach policy *AdministratorAccess*.
+1. My setup uses an IAM user called **iamadmin** with attach policy **AdministratorAccess**.
 ![Alt text](imgs/iamadmin%20-%20AWS%20console.png)
 
 You can create the same user or any other user with a different name, but we need to get the ARN for the user.
 
-This is important because in my *main.tf* I am using the ARN of the user.
-![Alt text](imgs/main.tf%20iamadmin.png)
-
+This is important because in my **main.tf** I am using the ARN of the user.
 Look at line #13. Make sure you put your user ARN there.
+![Alt text](imgs/main.tf%20iamadmin.png)
 
 2. Manually create ECR repository
 In your IDE terminal or simply in your terminal where AWS CLI is configured run:
 ```
 aws ecr create-repository --repository-name python-app --region eu-central-1
 ```
-Pay attention of the output of this command we need to grab the repositoryUri
+Pay attention of the output of this command we need to grab the **repositoryUri**
 
 
 # :rocket: Deployment Steps
