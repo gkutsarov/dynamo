@@ -128,6 +128,7 @@ docker build -t python-app .
 docker images
 ```
 ![Alt text](imgs/listing%20docker%20images.png)
+
 4. Leave the docker image for now. We would need it later.
 
 
