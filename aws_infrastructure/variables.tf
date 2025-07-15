@@ -91,6 +91,10 @@ variable "postgresql_node_group_desired_size" {
   default = "2"
 }
 
+variable "postgre_password" {
+  type = string
+}
+
 
 
 

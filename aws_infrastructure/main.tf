@@ -71,8 +71,8 @@ resource "kubernetes_secret" "python_app_to_postgresql" {
     namespace = "python-app"
   }
   data = {
-    password          = base64encode("mypassword") #Password for auth.username defined in dynamo_apps/postgresql-app.yaml
-    postgres-password = base64encode("mypassword") #Password for the postgres superuser (if used)
+    password          = var.postgre_password #Password for auth.username defined in dynamo_apps/postgresql-app.yaml
+    postgres-password = var.postgre_password #Password for the postgres superuser (if used)
   }
 }
 
@@ -83,7 +83,7 @@ resource "kubernetes_secret" "postgresql_secret" {
     namespace = "postgresql"
   }
   data = {
-    password          = base64encode("mypassword") #Password for auth.username defined in dynamo_apps/postgresql-app.yaml
-    postgres-password = base64encode("mypassword") #Password for the postgres superuser (if used)
+    password          = var.postgre_password #Password for auth.username defined in dynamo_apps/postgresql-app.yaml
+    postgres-password = var.postgre_password #Password for the postgres superuser (if used)
   }
 }
