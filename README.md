@@ -118,10 +118,15 @@ Terraform will use these credentials by default.
 ```
 cd flask_crud_app
 ```
-2. Once inside run the following command:
+2. Once inside run the following command. Which will build our image and tag it **python-app**
 ```
 docker build -t python-app .
 ```
+3. To see the image or all docker images run:
+```
+docker images
+```
+
 
 # :nut_and_bolt: Manual Configuration before Deployment (for now)
 
