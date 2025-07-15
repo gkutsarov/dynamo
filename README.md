@@ -89,6 +89,8 @@ Here’s a breakdown of the key files in this repository:
 1. Install required tools
     - **Terraform:** Ensure Terraform is installed. You can download it from the [official website](https://developer.hashicorp.com/terraform/install).
     - **AWS CLI:** Install the AWS Command Line Interface. Follow the [installation guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+    - **Docker** Ensure Docker Engine is installed. Follow the [installation guide](https://docs.docker.com/engine/install/)
+    - **kubectl** Ensure kubectl is installed. Follow the [installation guide](https://kubernetes.io/docs/tasks/tools/)
 2. Configure AWS Credentials
 Set up your AWS credentials to allow Terraform to authenticate with AWS:
 ```
@@ -118,6 +120,15 @@ You can create the same user or any other user with a different name, but we nee
 
 This is important because in my *main.tf* I am using the ARN of the user.
 ![Alt text](imgs/main.tf%20iamadmin.png)
+
+Look at line #13. Make sure you put your user ARN there.
+
+2. Manually create ECR repository
+In your IDE terminal or simply in your terminal where AWS CLI is configured run:
+```
+aws ecr create-repository --repository-name python-app --region eu-central-1
+```
+Pay attention of the output of this command we need to grab the repositoryUri
 
 
 # :rocket: Deployment Steps
