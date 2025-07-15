@@ -197,6 +197,11 @@ This value is used to create two Kubernetes secrets one in python-app namespace 
 
 This command applies the Terraform configuration to provision the infrastructure. The `--auto-approve` flag skips the interactive approval prompt.
 
+# :gear: Database and Application Configuration
+I am using ArgoCD to deploy my application and postgresql. Check argocd.tf file
+ArgoCD is configured to monitor **https://github.com/gkutsarov/dynamo_apps** repo.
+In **bootstrap** repo I am creating application manifests .yaml files which use helm charts to deploy the applications.
+
 # :heavy_check_mark: Verification
 After deployment, verify that the resources have been created:
 - **AWS Console:** Log in to the AWS Management Console and check the resources in the specified region.
