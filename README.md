@@ -171,6 +171,8 @@ Push your docker image to the ECR repository
 docker push 116529247286.dkr.ecr.eu-central-1.amazonaws.com/python-app:latest
 ```
 
+# :pick: EKS Endpoint Access Configuration
+1. In eks.tf file line #9 **cluster_endpoint_public_access_cidrs** to be equal to your IP address.
 
 # :rocket: Deployment Steps
 1. **Navigate to the Infrastructure Directory**
