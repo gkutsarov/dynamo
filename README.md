@@ -206,7 +206,8 @@ For the Postgresql there are 2 files. **postgresql-app.yaml** which uses the off
 Creating the following:
 ![Alt text](imgs/postgresql_app.png)
 
-I use another file **postgresql-init-configmap.yaml** of type configmap with which I am creating a table called **students**
+I use another file **postgresql-init-configmap.yaml** of type configmap with which I am creating a table called **students** during the creation of the database pod.
+
 ![Alt text](imgs/postgresql-configmap.png)
 
 
