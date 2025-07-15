@@ -202,6 +202,13 @@ I am using ArgoCD to deploy my application and postgresql. Check argocd.tf file
 ArgoCD is configured to monitor **https://github.com/gkutsarov/dynamo_apps** repo.
 In **bootstrap** repo I am creating application manifests .yaml files which use helm charts to deploy the applications.
 
+For the Postgresql there are 2 files. **postgresql-app.yaml** which uses the official Helm chart for the application which I have modifies with parameters for my use case.
+![Alt text](imgs/postgresql-app.png)
+
+I use another file **postgresql-init-configmap.yaml** of type configmap with which I am creating a table called **students**
+![Alt text](imgs/postgresql-configmap.png)
+
+
 # :heavy_check_mark: Verification
 After deployment, verify that the resources have been created:
 - **AWS Console:** Log in to the AWS Management Console and check the resources in the specified region.
