@@ -112,11 +112,15 @@ aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
 
 Terraform will use these credentials by default.
 
-# :pick: Building the docker image of our application
+# :pick: Building the docker image for our application
 
 1. Once you have cloned the repo navigate to **flask_crup_app**
 ```
 cd flask_crud_app
+```
+2. Once inside run the following command:
+```
+docker build -t python-app .
 ```
 
 # :nut_and_bolt: Manual Configuration before Deployment (for now)
