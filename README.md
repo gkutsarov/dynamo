@@ -114,9 +114,10 @@ Terraform will use these credentials by default.
 
 1. My setup uses an IAM user called *iamadmin* with attach policy *AdministratorAccess*.
 ![Alt text](imgs/iamadmin%20-%20AWS%20console.png)
+You can create the same user or any other user with a different name, but we need to get the ARN for the user.
 
-This is important because in my *main.tf* I am referencing this user ARN in the *eks.tf* file
-![Alt text](imgs/eks.tf%20-%20ref%20to%20eks_admin_role.png)
+This is important because in my *main.tf* I am using the ARN of the user.
+![Alt text](imgs/main.tf%20-%20iamadmin.png)
 
 
 # :rocket: Deployment Steps
