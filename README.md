@@ -129,7 +129,6 @@ docker images
 ```
 ![Alt text](imgs/listing%20docker%20images.png)
 
-
 4. Leave the docker image for now. We would need it later.
 
 
@@ -160,6 +159,16 @@ Login to your ECR with the command below but replace [URI_PLACEHOLDER] with your
 
 ```
 aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin [URI_PLACEHOLDER]
+```
+
+Tag your already build docker image with (Optional step)
+```
+docker tag python-app:latest 116529247286.dkr.ecr.eu-central-1.amazonaws.com/python-app:latest 
+```
+
+Push your docker image to the ECR repository
+```
+docker push 116529247286.dkr.ecr.eu-central-1.amazonaws.com/python-app:latest
 ```
 
 
