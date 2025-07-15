@@ -117,7 +117,7 @@ Terraform will use these credentials by default.
 You can create the same user or any other user with a different name, but we need to get the ARN for the user.
 
 This is important because in my *main.tf* I am using the ARN of the user.
-![Alt text](imgs/main.tf%20-%20iamadmin.png)
+![Alt text](imgs/main.tf%20iamadmin.png)
 
 
 # :rocket: Deployment Steps
