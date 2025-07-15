@@ -211,6 +211,8 @@ I use another file **postgresql-init-configmap.yaml** of type configmap with whi
 ![Alt text](imgs/postgresql-configmap.png)
 
 For my Python app we are doing the same with **python-app.yaml**. Creating an application manifest which points to **python_app** repository where my custom Helm chart is.
+![Alt text](imgs/python-app.png)
+![Alt text](imgs/python-app-values.png)
 
 # :heavy_check_mark: Verification
 After deployment, verify that the resources have been created:
