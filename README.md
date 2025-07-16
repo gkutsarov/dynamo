@@ -232,6 +232,13 @@ aws eks update-kubeconfig --region eu-central-1 --name DynamoEKS --role-arn arn:
 After deployment, verify that the resources have been created:
 - **AWS Console:** Log in to the AWS Management Console and check the resources in the specified region.
 
+# :star: Further Improvements
+
+1. Create a bastion host to connect to from which we have access to the EKS cluster.
+2. Network Policy for the Postgresql to limit the connections only from the python-app namespace.
+3. Image tag for the docker image not to be always the **latest** but auto increment or commit sha variable
+4. Deploy ECR with Terraform
+
 # :broom: Cleanup
 To destroy the resources created by Terraform:
 ```
