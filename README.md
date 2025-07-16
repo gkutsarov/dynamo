@@ -220,7 +220,15 @@ It is important to note that you shold use your ECR repository which we created 
 ![Alt text](imgs/python-app.png)
 ![Alt text](imgs/python-app-values.png)
 
-# :heavy_check_mark: Verification
+# :heavy_check_mark: Verification and Accessing the EKS cluster
+After deployment, to access the cluster we need to assume the role which we created in **main.tf** for our **iamadmin** user.
+Replace the ARN with yours in the command below and execute it:
+```
+aws eks update-kubeconfig --region eu-central-1 --name DynamoEKS --role-arn arn:aws:iam::[YOUR_ARN]:role/eks_admin_role
+```
+
+![Alt text](imgs/kubectl%20role.png)
+
 After deployment, verify that the resources have been created:
 - **AWS Console:** Log in to the AWS Management Console and check the resources in the specified region.
 
