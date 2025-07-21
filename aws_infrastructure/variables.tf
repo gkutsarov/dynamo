@@ -1,13 +1,13 @@
 variable "region" {
   description = "The AWS region to deploy resources in"
   type        = string
-  default     = "eu-central-1"
+  default     = "eu-west-3"
 }
 
 variable "availability_zones" {
   description = "List of availability zones"
   type        = list(string)
-  default     = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
+  default     = ["eu-west-3a", "eu-west-3b", "eu-west-3c"]
 }
 
 variable "vpc_name" {
